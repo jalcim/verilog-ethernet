@@ -33,12 +33,6 @@ THE SOFTWARE.
  */
 module ssio_sdr_out #
 (
-    // target ("SIM", "GENERIC", "XILINX", "ALTERA")
-    parameter TARGET = "GENERIC",
-    // IODDR style ("IODDR", "IODDR2")
-    // Use IODDR for Virtex-4, Virtex-5, Virtex-6, 7 Series, Ultrascale
-    // Use IODDR2 for Spartan-6
-    parameter IODDR_STYLE = "IODDR2",
     // Width of register in bits
     parameter WIDTH = 1
 )
@@ -52,8 +46,6 @@ module ssio_sdr_out #
 );
 
 oddr #(
-    .TARGET(TARGET),
-    .IODDR_STYLE(IODDR_STYLE),
     .WIDTH(1)
 )
 clk_oddr_inst (
@@ -63,7 +55,6 @@ clk_oddr_inst (
     .q(output_clk)
 );
 
-(* IOB = "TRUE" *)
 reg [WIDTH-1:0] output_q_reg = {WIDTH{1'b0}};
 
 assign output_q = output_q_reg;
